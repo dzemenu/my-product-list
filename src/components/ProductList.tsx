@@ -6,10 +6,13 @@ import {
 import ProductItem from "./ProductItem";
 export default function ProductList() {
   const { data, error, isLoading, isFetching, isSuccess } =
-    useGetByCategoryQuery("smartphones");
+  useGetAllProductsQuery()
+    //useGetByCategoryQuery("smartphones");
   return (
-    <div className="m-20 flex justify-center items-center carousel rounded-box">
-      <h1> ProductList</h1>
+    <div
+      className="m-20  justify-center items-center  rounded-box 
+    grid grid-cols-3 gap-10 "
+    >
       {isLoading && <h3>....loading</h3>}
       {isFetching && <h3>....fetching</h3>}
       {error && <h3>error</h3>}
