@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import {  createHashRouter, Outlet, RouterProvider } from "react-router-dom";
@@ -18,7 +18,7 @@ const router = createHashRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "/*",
         element: <App />,
       },
       {
