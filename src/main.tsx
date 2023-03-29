@@ -1,7 +1,7 @@
 import React, { Children } from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import {  createHashRouter, Outlet, RouterProvider } from "react-router-dom";
 import App from "./App";
 import { Cart } from "./components/Cart";
 import Header from "./components/Header";
@@ -13,7 +13,7 @@ const Layout = () => (
     <Outlet />
   </>
 );
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     element: <Layout />,
     children: [
