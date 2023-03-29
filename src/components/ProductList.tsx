@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useGetAllProductsQuery } from "../features/api/apiSlice";
+import { selectCart } from "../features/store/productSlice";
 import ProductItem from "./ProductItem";
 export default function ProductList() {
   const { data, error, isLoading, isFetching, isSuccess } =
@@ -7,13 +9,14 @@ export default function ProductList() {
   //useGetByCategoryQuery("smartphones");
   const [searchValue, setSearchValue] = useState("");
   const [searchProducts, setSearchProducts] = useState(data);
-  console.log("searchProducts", isSuccess, searchProducts);
+  const pp=useSelector(selectCart)
+  console.log("searchProducts", pp);
   useEffect(() => {}, [data]);
-  const searchHandler = (e) => {
+  const searchHandler = (e:any) => {
     e.preventDefault();
     setSearchValue(e.target.value);
     setSearchProducts(
-      searchProducts?.products.filter((v: { title: string | string[] }) =>
+      searchProducts?.product.filter((v: { title: string | string[] }) =>
         v.title.includes(searchValue)
       )
     );
