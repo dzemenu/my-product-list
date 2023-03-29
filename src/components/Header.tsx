@@ -1,8 +1,15 @@
 import React from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { selectCart } from "../features/store/productSlice";
+import { RootState } from "../features/store/store";
+const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 export default function Header() {
+  const products = useTypedSelector(selectCart);
+  
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar base-00 sticky top-0 z-30 w-full">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -55,7 +62,10 @@ export default function Header() {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">PROcart</a>
+        <Link to='/'> <a className="btn btn-ghost normal-case text-xl" >
+          PROcart
+        </a></Link>
+       
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -90,9 +100,10 @@ export default function Header() {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn bg-red-500 text-white">
-          <FaShoppingCart />
-        </a>
+        <Link to="/cart"><a className="  text-red-500" >
+        <FaShoppingCart size={20} />{products.items.length} 
+        </a></Link>
+        
       </div>
     </div>
   );
