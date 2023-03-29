@@ -1,6 +1,6 @@
 {
   "name": "my-product-list",
-  "private": true,
+  "homepage": "https://dzemenu.github.io/my-product-list",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
