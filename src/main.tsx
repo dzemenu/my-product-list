@@ -15,7 +15,7 @@ const Layout = () => (
 );
 const router = createHashRouter([
   {
-    path: "/",
+   
     element: <Layout />,
     children: [
       {
