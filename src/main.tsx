@@ -1,7 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import {  createHashRouter, Outlet, RouterProvider } from "react-router-dom";
+import {
+  createHashRouter,
+  HashRouter,
+  Outlet,
+  RouterProvider,
+} from "react-router-dom";
 import App from "./App";
 import { Cart } from "./components/Cart";
 import Header from "./components/Header";
@@ -32,7 +37,9 @@ const router = createHashRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <HashRouter>
+        <RouterProvider router={router} />
+      </HashRouter>
     </Provider>
   </React.StrictMode>
 );
