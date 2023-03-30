@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useGetAllProductsQuery } from "../features/api/apiSlice";
-import { selectCart } from "../features/store/productSlice";
 import ProductItem from "./ProductItem";
 export default function ProductList() {
   const { data, error, isLoading, isFetching, isSuccess } =
@@ -9,8 +7,6 @@ export default function ProductList() {
   //useGetByCategoryQuery("smartphones");
   const [searchValue, setSearchValue] = useState("");
   const [searchProducts, setSearchProducts] = useState(data);
-  const pp=useSelector(selectCart)
-  console.log("searchProducts", pp);
   useEffect(() => {}, [data]);
   const searchHandler = (e:any) => {
     e.preventDefault();
@@ -29,6 +25,7 @@ export default function ProductList() {
         className="input w-1/2 "
         value={searchValue}
         onChange={searchHandler}
+        
       />
       <div
         className="m-10    rounded-box 

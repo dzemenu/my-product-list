@@ -12,34 +12,36 @@ import { Cart } from "./components/Cart";
 import Header from "./components/Header";
 import { store } from "./features/store/store";
 import "./index.css";
-const Layout = () => (
-  <>
-    <Header />
-    <Outlet />
-  </>
-);
-const router = createHashRouter([
-  {
+// const Layout = () => (
+//   <>
+//     <Header />
+//     <Outlet />
+//   </>
+// );
+// const router = createHashRouter([
+//   {
    
-    element: <Layout />,
-    children: [
-      {
-        path: "/*",
-        element: <App />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
-    ],
-  },
-]);
+//     element: <Layout />,
+//     children: [
+//       {
+//         path: "/*",
+//         element: <App />,
+//       },
+//       {
+//         path: "/cart",
+//         element: <Cart />,
+//       },
+//     ],
+//   },
+// ]);
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <HashRouter>
-        <RouterProvider router={router} />
-      </HashRouter>
+   
+       <HashRouter>
+        <App/>
+       </HashRouter>
+     
     </Provider>
   </React.StrictMode>
 );
