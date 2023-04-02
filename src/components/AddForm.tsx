@@ -1,61 +1,186 @@
-import React from 'react';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import React from "react";
+import { Formik, Form, Field, useFormik } from "formik";
+import * as Yup from "yup";
+import { useAddProductMutation } from "../features/api/apiSlice";
 
-const SignupSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  lastName: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
+const AddFormSchema = Yup.object().shape({
+  title: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  description: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  price: Yup.number().required("Required"),
+  rating: Yup.number().required("Required"),
+  stock: Yup.number().required("Required"),
+  brand: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  category: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
 });
 
-export const AddForm = () => (
-  <div>
-    <h1>Signup</h1>
-    <Formik
-      initialValues={{
-        firstName: '',
-        lastName: '',
-        email: '',
-      }}
-      validationSchema={SignupSchema}
-      onSubmit={values => {
-        // same shape as initial values
-        console.log(values);
-      }}
-    >
-      {({ errors, touched }) => (
-        <Form >
-          
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <div className="card-body">
-        <div className="form-control">
+export const AddForm = () => {
+  const [addProduct, isLoading] = useAddProductMutation();
+  const onSubmit = async (values, actions) => {
+    console.log("values", values);
+    console.log(actions);
+    await addProduct(values);
+    alert("Product Added successfully");
+    actions.resetForm();
+  };
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+
+    handleChange,
+    handleSubmit,
+  } = useFormik({
+    initialValues: {
+      title: "",
+      description: "",
+      price: 0,
+      rating: 0,
+      stock: 0,
+      brand: "",
+      category: "",
+    },
+    validationSchema: AddFormSchema,
+    onSubmit,
+  });
+  return (
+    <div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col justify-center w-full gap-2 py-4"
+      >
+        <div className="flex justify-between">
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className="label-text mx-10">Title</span>
           </label>
-          <input type="text" placeholder="email" className="input input-bordered" />
+          <input
+            id="title"
+            type="text"
+            placeholder="title"
+            className="input input-bordered "
+            value={values.title}
+            onChange={handleChange}
+          />
         </div>
-        <div className="form-control">
+        {errors.title && touched.title && (
+          <h3 className="text-red-500	flex justify-end	">error</h3>
+        )}
+        <div className="flex justify-between">
           <label className="label">
-            <span className="label-text">Password</span>
+            <span className="label-text mx-10">Description</span>
           </label>
-          <input type="text" placeholder="password" className="input input-bordered" />
+          <input
+            id="description"
+            type="text"
+            placeholder="description"
+            className="input input-bordered "
+            value={values.description}
+            onChange={handleChange}
+          />
+        </div>
+        {errors.description && touched.description && (
+          <h3 className="text-red-500	flex justify-end">error</h3>
+        )}
+        <div className="flex justify-between">
           <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+            <span className="label-text mx-10">Price</span>
           </label>
+          <input
+            id="price"
+            type="number"
+            placeholder="price"
+            className="input input-bordered "
+            value={values.price}
+            onChange={handleChange}
+          />
         </div>
-        <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+        {errors.price && touched.price && (
+          <h3 className="text-red-500	flex justify-end">error</h3>
+        )}
+        <div className="flex justify-between">
+          <label className="label">
+            <span className="label-text mx-10">Rating</span>
+          </label>
+          <input
+            id="rating"
+            type="number"
+            placeholder="price"
+            className="input input-bordered "
+            value={values.rating}
+            onChange={handleChange}
+          />
         </div>
-      </div>
+        {errors.rating && touched.rating && (
+          <h3 className="text-red-500	flex justify-end">error</h3>
+        )}
+        <div className="flex justify-between">
+          <label className="label">
+            <span className="label-text mx-10">Stock</span>
+          </label>
+          <input
+            id="stock"
+            type="number"
+            placeholder="price"
+            className="input input-bordered "
+            value={values.stock}
+            onChange={handleChange}
+          />
+        </div>
+        {errors.stock && touched.stock && (
+          <h3 className="text-red-500	flex justify-end">error</h3>
+        )}
+        <div className="flex justify-between">
+          <label className="label">
+            <span className="label-text mx-10">Brand</span>
+          </label>
+          <input
+            id="brand"
+            type="number"
+            placeholder="price"
+            className="input input-bordered "
+            value={values.brand}
+            onChange={handleChange}
+          />
+        </div>
+        {errors.brand && touched.brand && (
+          <h3 className="text-red-500	flex justify-end">error</h3>
+        )}
+        <div className="flex justify-between">
+          <label className="label">
+            <span className="label-text mx-10">Category</span>
+          </label>
+          <input
+            id="category"
+            type="text"
+            placeholder="price"
+            className="input input-bordered "
+            value={values.category}
+            onChange={handleChange}
+          />
+        </div>
+        {errors.category && touched.category && (
+          <h3 className="text-red-500	flex justify-end">error</h3>
+        )}
+        <button
+          className="btn mx-20 mt-10  "
+          type="submit"
+          disabled={isSubmitting}
+        >
+          Add to Store
+        </button>
+      </form>
     </div>
-        </Form>
-      )}
-    </Formik>
-  </div>
-);
+  );
+};

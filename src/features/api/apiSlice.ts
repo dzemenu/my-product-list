@@ -11,6 +11,13 @@ export const productApi = createApi({
     getByCategory: builder.query<productState[], string>({
       query: (name) => `/products/category/${name}`,
     }),
+    addProduct:builder.mutation<productState, Partial<productState>>({
+      query:(body)=>({
+ url:'add',
+ method:'POST',
+ body
+      }),
+    })
   }),
 });
-export const { useGetAllProductsQuery, useGetByCategoryQuery } = productApi;
+export const { useGetAllProductsQuery, useGetByCategoryQuery,useAddProductMutation } = productApi;
