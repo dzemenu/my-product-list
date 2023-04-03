@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field, useFormik } from "formik";
+import {  useFormik } from "formik";
 import * as Yup from "yup";
 import { useAddProductMutation } from "../features/api/apiSlice";
 
@@ -27,7 +27,7 @@ const AddFormSchema = Yup.object().shape({
 
 export const AddForm = () => {
   const [addProduct, isLoading] = useAddProductMutation();
-  const onSubmit = async (values, actions) => {
+  const onSubmit = async (values:any, actions:any) => {
     console.log("values", values);
     console.log(actions);
     await addProduct(values);
@@ -147,7 +147,7 @@ export const AddForm = () => {
           </label>
           <input
             id="brand"
-            type="number"
+            type="text"
             placeholder="price"
             className="input input-bordered "
             value={values.brand}
