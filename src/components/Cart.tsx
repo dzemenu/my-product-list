@@ -50,7 +50,7 @@ useEffect(()=>{},[sortFlag])
               <th></th>
             </tr>
           </thead>
-          {sorted.map((p:any,idx) => (
+          {sorted.map((p:any,idx:number) => (
             <tbody key={idx}>
               {/* row 1 */}
               <tr>

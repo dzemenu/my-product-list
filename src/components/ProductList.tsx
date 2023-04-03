@@ -30,7 +30,7 @@ useEffect(()=>{},[searchProducts,searchValue])
         />
         <div
           className="m-10    rounded-box 
-    grid grid-cols-1 md:grid-cols-3 gap-10 "
+    grid  md:grid-cols-3 gap-10 sm:grid-cols-1"
         >
           {isLoading && <h3>....loading</h3>}
           {isFetching && <h3>....fetching</h3>}
