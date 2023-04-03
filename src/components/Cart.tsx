@@ -6,12 +6,13 @@ import {
   selectCart,
 } from "../features/store/productSlice";
 import { RootState } from "../features/store/store";
-import { FaLongArrowAltUp } from "react-icons/fa";
+import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const Cart = () => {
   const products = useTypedSelector(selectCart);
   const dispatch = useDispatch();
   const [sorted, setSorted] = useState([]);
+  const [sortFlag,setSortFLag]=useState(false)
   useEffect(() => {
     if (products) {
       let d = [...products.items] as unknown as productState;
@@ -20,7 +21,9 @@ export const Cart = () => {
   }, [products]);
 
   const handleSort = () => {
-    return setSorted(sorted.reverse())};
+  setSorted(sorted.reverse())
+setSortFLag(!sortFlag)};
+useEffect(()=>{},[sortFlag])
   return (
     <div className="overflow-x-auto w-full">
       {products.items.length > 0 ? (
@@ -39,7 +42,7 @@ export const Cart = () => {
                   className="btn btn-sm bg-white border-none text-red-400"
                   onClick={handleSort}
                 >
-                  <FaLongArrowAltUp />
+                 { sortFlag ?<FaLongArrowAltDown />: <FaLongArrowAltUp />}
                 </div>
               </th>
               <th>Description</th>
