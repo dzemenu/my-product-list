@@ -28,8 +28,7 @@ const AddFormSchema = Yup.object().shape({
 export const AddForm = () => {
   const [addProduct, isLoading] = useAddProductMutation();
   const onSubmit = async (values:any, actions:any) => {
-    console.log("values", values);
-    console.log(actions);
+  
     await addProduct(values);
     alert("Product Added successfully");
     actions.resetForm();
@@ -148,7 +147,7 @@ export const AddForm = () => {
           <input
             id="brand"
             type="text"
-            placeholder="price"
+            placeholder="brand"
             className="input input-bordered "
             value={values.brand}
             onChange={handleChange}
@@ -164,7 +163,7 @@ export const AddForm = () => {
           <input
             id="category"
             type="text"
-            placeholder="price"
+            placeholder="category"
             className="input input-bordered "
             value={values.category}
             onChange={handleChange}

@@ -6,7 +6,7 @@ import {
   selectCart,
 } from "../features/store/productSlice";
 import { RootState } from "../features/store/store";
-import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
+import { FaLongArrowAltDown, FaLongArrowAltUp, FaOpencart } from "react-icons/fa";
 const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const Cart = () => {
   const products = useTypedSelector(selectCart);
@@ -108,7 +108,8 @@ useEffect(()=>{},[sortFlag])
           </tfoot>
         </table>
       ) : (
-        <h1>nothing to display</h1>
+        <div className="flex justify-center items-center m-auto"> <h1 className="text-8xl">empty cart<FaOpencart /></h1></div>
+       
       )}
     </div>
   );
